@@ -27,6 +27,8 @@ struct ContentView: View {
                 Section("Your score: \n (5 points per word and 1 point per letter)") {
                     Text("\(score)")
                 }
+                .accessibilityElement()
+                .accessibilityLabel("Your score is \(score)")
                 Section {
                     TextField("Enter your word", text: $newWord)
                         .textInputAutocapitalization(.never) // block starting with capital letter
@@ -37,6 +39,8 @@ struct ContentView: View {
                             Image(systemName: "\(word.count).circle")
                             Text(word)
                         }
+                        .accessibilityElement()
+                        .accessibilityLabel("\(word), \(word.count) letters")
                     }
                 }
             }
@@ -148,7 +152,7 @@ struct ContentView: View {
     }
     
     func calculateScore() {
-        var wordsAmount = usedWords.count
+        let wordsAmount = usedWords.count
         var lettersInGame = 0
         for a in usedWords {
             lettersInGame += a.count
